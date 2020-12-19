@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const alertSchema = new mongoose.Schema({
-    id: {
+    sensor: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'sensor'
     },
