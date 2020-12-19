@@ -13,10 +13,20 @@ mongoose.connect(DATABASE_URL, {
 
 const db = mongoose.connection
 
+const sensorCollection = db.collection('sensors')
+
+
 db.on('error', error => console.error(error))
 
 db.once('open', () => {
     console.log('conneted to monogdb')
+    const changeStream = sensorCollection.watch()
+    changeStream.on('change', (change) => {
+        if (change.operationType === 'insert'){
+            const data = change.fullDocument;
+            console.log(data)
+        }
+    })
 })
 
 app.use('/', require('./routes/indexRouter'))
