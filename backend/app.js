@@ -2,6 +2,9 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const env = require('dotenv')
+const Alert = require('./models/alert')
+const TemperatureLimit = require('./operations/checkTemperatureLimit')
+const { Result } = require('express-validator')
 env.config()
 const app = express()
 
@@ -28,6 +31,29 @@ db.once('open', () => {
     changeStream.on('change', (change) => {
         if (change.operationType === 'insert') {
             const data = change.fullDocument
+            if (TemperatureLimit.checkValue(data.data_value)) {
+                const alert = new Alert({
+                    sensor: new mongoose.Types.ObjectId(),
+                    sensor_id: sensor_id,
+                    alertText: "Temperature is gretter than 25C"
+                })
+                alert
+                    .save()
+                    .then(result => {
+                        console.log(result)
+                    })
+                    .catch(err => {
+                        res.status(404).json({
+                            error: 'Error is occure'
+                        });
+                        console.log(err)
+                    })
+            } else {
+                res.status(200).json({
+                    message: "Status normal"
+                });
+                console.log("Temeperature is normal")
+            }
             console.log(data)
         }
     })
