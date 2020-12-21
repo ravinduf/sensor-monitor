@@ -26,7 +26,7 @@ db.once('open', () => {
 
     changeStream.on('change', (change) => {
         if (change.operationType === 'insert') {
-            const data = change.fullDocument;
+            const data = change.fullDocument
             console.log(data)
         }
     })
