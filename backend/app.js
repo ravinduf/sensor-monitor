@@ -6,10 +6,11 @@ const app = express()
 
 const DATABASE_URL = "mongodb+srv://new-user:software123@cluster0.pnwp2.mongodb.net/sensors?retryWrites=true&w=majority"
 
-app.use(bodyParser.json({extended: true }))
+app.use(bodyParser.json({ extended: true }))
 
 mongoose.connect(DATABASE_URL, {
-    useNewUrlParser: true, useUnifiedTopology: true})
+    useNewUrlParser: true, useUnifiedTopology: true
+})
 
 const db = mongoose.connection
 
@@ -22,17 +23,22 @@ db.once('open', () => {
     console.log('conneted to monogdb')
 
     const changeStream = sensorCollection.watch();
- 
+
     changeStream.on('change', (change) => {
-        if (change.operationType === 'insert'){
+        if (change.operationType === 'insert') {
             const data = change.fullDocument;
             console.log(data)
         }
     })
-    
+
 })
 
 app.use('/', require('./routes/indexRouter'))
+app.use((req, res, next) => {
+    const error = new Error('Not found');
+    error.status(404);
+    next(error);
+});
 
 const PORT = 5000
 
