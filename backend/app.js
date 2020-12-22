@@ -48,6 +48,9 @@ db.once('open', () => {
                         });
                         console.log(err)
                     })
+
+                    // notification seniding logic
+                    
             } else {
                 console.log("Temeperature is normal")
             }
