@@ -35,7 +35,7 @@ db.once('open', () => {
                 const alert = new Alert({
                     sensor: data._id,
                     sensor_id: data.sensor_id,
-                    alertText: "Temperature is gretter than 25C"
+                    alertText: process.env.ALERT_MESSAGE
                 })
                 alert
                     .save()
