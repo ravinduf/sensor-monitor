@@ -33,8 +33,8 @@ db.once('open', () => {
             const data = change.fullDocument
             if (TemperatureLimit.checkValue(data.data_value)) {
                 const alert = new Alert({
-                    sensor: new mongoose.Types.ObjectId(),
-                    sensor_id: sensor_id,
+                    sensor: data._id,
+                    sensor_id: data.sensor_id,
                     alertText: "Temperature is gretter than 25C"
                 })
                 alert
