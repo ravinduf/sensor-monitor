@@ -14,10 +14,4 @@ const getData = async (req, res) => {
     }
 }
 
-
-const checkForAlert = () => {
-
-}
-
-
 module.exports = {getData}
