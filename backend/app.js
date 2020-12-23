@@ -2,8 +2,9 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const env = require('dotenv')
-const Alert = require('./models/alert')
+const processedReading = require('./models/processedReading')
 const TemperatureLimit = require('./operations/checkTemperatureLimit')
+const convertToDateObject = require('./operations/convertToDateObject')
 const { Result } = require('express-validator')
 env.config()
 const app = express()
@@ -29,15 +30,26 @@ db.once('open', () => {
     const changeStream = sensorCollection.watch();
 
     changeStream.on('change', (change) => {
+        
         if (change.operationType === 'insert') {
             const data = change.fullDocument
+
+            const newProcessedReading = new processedReading({
+                sensor_reading_id: data._id,
+                sensor_id: data.sensor_id,
+                reading_type: 'temperature',
+                data_value: data.data_value,
+                date: convertToDateObject(data.date)
+            })
+            
             if (TemperatureLimit.checkValue(data.data_value)) {
-                const alert = new Alert({
-                    sensor: data._id,
-                    sensor_id: data.sensor_id,
-                    alertText: "Temperature is gretter than 25C"
-                })
-                alert
+                newProcessedReading.alert = {
+                        alertStatus: true,
+                        alertText: "Temperature is greater than threshold value"
+                }
+            }
+            
+            newProcessedReading
                     .save()
                     .then(result => {
                         console.log(result)
@@ -48,19 +60,16 @@ db.once('open', () => {
                         });
                         console.log(err)
                     })
-
-                    // notification seniding logic
-                    
-            } else {
-                console.log("Temeperature is normal")
-            }
-            console.log(data)
+             
+            
+            console.log("\n", data)
         }
+        
     })
-
 })
 
 app.use('/', require('./routes/indexRouter'))
+
 app.use((req, res, next) => {
     const error = new Error('Not found')
     error.status(404)

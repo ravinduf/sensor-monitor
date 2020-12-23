@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Alert = require('../models/alert');
+const Alert = require('../models/processedReading');
 
 router.get('/notification/:id',async (req,res) => {
     try{
