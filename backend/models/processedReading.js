@@ -9,6 +9,7 @@ const processedReadingSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    reading_type: String,
     data_value: String,
     date: Date,
     alert:{
@@ -20,6 +21,6 @@ const processedReadingSchema = new mongoose.Schema({
     }
 })
 
-const processedReading = mongoose.model('processedReading',readingSchema);
+const processedReading = mongoose.model('processedReading',processedReadingSchema);
 
 module.exports = processedReading;
