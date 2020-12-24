@@ -1,5 +1,5 @@
 const express = require('express');
-const {check,validationResult} = require('express-validator/check');
+const { check, validationResult } = require('express-validator/check');
 const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -8,25 +8,26 @@ const router = express.Router();
 const User = require('../../models/User');
 const config = require('config');
 
-router.post('/',[
-    check('name','Name is Required').not().isEmpty(),
-    check('email','Please enter valid email').isEmail(),
-    check('password','Please enter a password with 6 or more').isLength({min: 6}),
-],async (req,res) => {
+router.post('/', [
+    check('name', 'Name is Required').not().isEmpty(),
+    check('email', 'Please enter valid email').isEmail(),
+    check('number', "Phone number is required").isEmpty(),
+    check('password', 'Please enter a password with 6 or more').isLength({ min: 6 }),
+], async (req, res) => {
     const errors = validationResult(req);
-    if(!errors.isEmpty()){
-        return res.status(400).json({errors: errors.array()});
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
     }
 
-    const {name,email,password} = req.body;
+    const { name, email, number, password } = req.body;
 
-    try{
-        let user = await User.findOne({email: email});
-        if(user){
-            res.status(400).json({errors: [{msg: 'User exist'}]})
+    try {
+        let user = await User.findOne({ email: email });
+        if (user) {
+            res.status(400).json({ errors: [{ msg: 'User exist' }] })
         }
 
-        const avatar = gravatar.url(email,{
+        const avatar = gravatar.url(email, {
             s: '200',
             r: 'pg',
             d: 'mm'
@@ -35,30 +36,31 @@ router.post('/',[
         user = new User({
             name,
             email,
+            number,
             avatar,
             password
         });
 
         const salt = await bcrypt.genSalt(10);
 
-        user.password = await bcrypt.hash(password,salt);
+        user.password = await bcrypt.hash(password, salt);
 
         await user.save();
 
-        const  payload = {
+        const payload = {
             user: {
                 id: user.id
             }
         };
 
-        jwt.sign(payload,config.get('jwtSecret'),{expiresIn: 360000},(err,token) => {
-            if(err){
+        jwt.sign(payload, config.get('jwtSecret'), { expiresIn: 360000 }, (err, token) => {
+            if (err) {
                 throw err;
             }
-            res.json({token: token})
+            res.json({ token: token })
         });
 
-    }catch (err) {
+    } catch (err) {
         console.error(err.toString());
         return res.status(500).send('Server error');
     }
