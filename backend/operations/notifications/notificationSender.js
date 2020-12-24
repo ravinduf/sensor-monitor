@@ -1,5 +1,5 @@
-const emailNotification = require('./emailNotification')
-const smsNotification = require('./smsNotification')
+const emailNotification = require('./notificationMethods/emailNotification')
+const smsNotification = require('./notificationMethods/smsNotification')
 
 const notificationSender = ({notifier}) => {
     if(notifier.email){
