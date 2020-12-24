@@ -3,7 +3,6 @@ const processedReading = require('../models/processedReading')
 
 const getData = async (req, res) => {
 
-    console.log(req.query)
     const queryStatement = {
         reading_type: 'temperature'
     }
@@ -17,11 +16,9 @@ const getData = async (req, res) => {
     else if (req.query.endDate) {
         queryStatement.date = { $lte : req.query.endDate}
     }
-    
-    console.log(queryStatement)
+ 
     
     try{
-        
         const tempData = await processedReading.find(queryStatement)
         console.log(tempData.length)
         res.status(200).json(tempData)
@@ -36,8 +33,7 @@ const getData = async (req, res) => {
 const getTempAlerts = async (req, res) => {
     
     try {
-        const alerts = await processedReading.find( {reading_type: 'temperature', 'alert.alertStatus' : true })
-        console.log(alerts.length)    
+        const alerts = await processedReading.find( {reading_type: 'temperature', 'alert.alertStatus' : true })   
         res.status(200).json(alerts)
     } catch (error) {
         console.log(error)
