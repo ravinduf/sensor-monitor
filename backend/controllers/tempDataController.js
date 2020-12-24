@@ -1,21 +1,21 @@
 const processedReading = require('../models/processedReading')
-const sensor = require('../models/processedReading')
 
 
 const getData = async (req, res) => {
 
+    console.log(req.query)
     const queryStatement = {
         reading_type: 'temperature'
     }
     
-    if (req.query.start && req.query.end) {
-        queryStatement.date = { $gte : req.query.start, $lte : req.query.end }
+    if (req.query.startDate && req.query.endDate) {
+        queryStatement.date = { $gte : req.query.startDate, $lte : req.query.endDate }
     }
-    else if (req.query.start){
-        queryStatement.date = { $gte : req.query.start}
+    else if (req.query.startDate){
+        queryStatement.date = { $gte : req.query.startDate}
     }
-    else if (req.query.end) {
-        queryStatement.date = { $lte : req.query.end}
+    else if (req.query.endDate) {
+        queryStatement.date = { $lte : req.query.endDate}
     }
     
     console.log(queryStatement)
@@ -36,7 +36,7 @@ const getData = async (req, res) => {
 const getTempAlerts = async (req, res) => {
     
     try {
-        const alerts = await processedReading.find( {'alert.alertStatus' : true })
+        const alerts = await processedReading.find( {reading_type: 'temperature', 'alert.alertStatus' : true })
         console.log(alerts.length)    
         res.status(200).json(alerts)
     } catch (error) {
