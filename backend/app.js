@@ -48,10 +48,10 @@ db.once('open', () => {
                         });
                         console.log(err)
                     })
+
+                    // notification seniding logic
+                    
             } else {
-                res.status(200).json({
-                    message: "Status normal"
-                });
                 console.log("Temeperature is normal")
             }
             console.log(data)
