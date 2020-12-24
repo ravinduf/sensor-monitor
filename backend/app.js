@@ -43,22 +43,20 @@ db.once('open', () => {
             })
             
             if (TemperatureLimit.checkValue(data.data_value)) {
-<<<<<<< HEAD
-                const alert = new Alert({
-                    sensor: data._id,
-                    sensor_id: data.sensor_id,
-                    alertText: process.env.ALERT_MESSAGE
-                })
-                alert
-=======
+// <<<<<<< HEAD
+//                 const alert = new Alert({
+//                     sensor: data._id,
+//                     sensor_id: data.sensor_id,
+//                     alertText: process.env.ALERT_MESSAGE
+//                 })
+//                 alert
+// =======
                 newProcessedReading.alert = {
                         alertStatus: true,
                         alertText: "Temperature is greater than threshold value"
                 }
             }
-            
             newProcessedReading
->>>>>>> main
                     .save()
                     .then(result => {
                         console.log(result)
