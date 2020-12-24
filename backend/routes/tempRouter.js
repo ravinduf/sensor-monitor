@@ -4,8 +4,8 @@ const sensor = require('../models/sensor')
 const {getData , getTempAlerts} = require('../controllers/tempDataController')
 
 
-router.get('/tempData', getData)
-router.get('/tempAlerts', getTempAlerts)
+router.get('/data', getData)
+router.get('/alerts', getTempAlerts)
 
 
 module.exports = router

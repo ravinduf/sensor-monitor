@@ -68,7 +68,7 @@ db.once('open', () => {
     })
 })
 
-app.use('/', require('./routes/tempRouter'))
+app.use('/temperature', require('./routes/tempRouter'))
 
 app.use((req, res, next) => {
     const error = new Error('Not found')
