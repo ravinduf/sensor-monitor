@@ -1,14 +1,28 @@
 const emailNotification = require('./notificationMethods/emailNotification')
 const smsNotification = require('./notificationMethods/smsNotification')
 
-const notificationSender = ({notifier}) => {
+// const notificationSender = ({notifier}) => {
+//     if(notifier.email){
+//         emailNotification();
+//     }
+
+//     else if (notifier.phoneNumber) {
+//         smsNotification();
+//         voiceNotification()
+//     }
+// }
+module.exports.notificationSender = function(notifier) {
     if(notifier.email){
-        emailNotification();
+        emailNotification()
+        return true
     }
 
     else if (notifier.phoneNumber) {
-        smsNotification();
+        smsNotification()
         voiceNotification()
+        return true
+    } else {
+        return false
     }
 }
 
