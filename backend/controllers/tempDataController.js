@@ -36,7 +36,8 @@ const getData = async (req, res) => {
 const getTempAlerts = async (req, res) => {
     
     try {
-        const alerts = await processedReading.find({ alert : { alertStatus : true}})    
+        const alerts = await processedReading.find( {'alert.alertStatus' : true })
+        console.log(alerts.length)    
         res.status(200).json(alerts)
     } catch (error) {
         console.log(error)
