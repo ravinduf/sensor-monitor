@@ -6,6 +6,7 @@ const processedReading = require('./models/processedReading')
 const TemperatureLimit = require('./operations/checkTemperatureLimit')
 const convertToDateObject = require('./operations/convertToDateObject')
 const { Result } = require('express-validator')
+const user = require('./models/user')
 env.config()
 const app = express()
 
@@ -50,7 +51,15 @@ db.once('open', () => {
 //                     alertText: process.env.ALERT_MESSAGE
 //                 })
 //                 alert
-// =======
+// =======  
+                user.find()
+                .exec()
+                .then(result => {
+                    
+                })
+                .catch(err => {
+                    console.log("Can not send Notifications")
+                })
                 newProcessedReading.alert = {
                         alertStatus: true,
                         alertText: "Temperature is greater than threshold value"
