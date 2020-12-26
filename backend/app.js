@@ -7,6 +7,8 @@ const processedReading = require('./models/processedReading')
 const TemperatureLimit = require('./operations/checkTemperatureLimit')
 const convertToDateObject = require('./operations/convertToDateObject')
 const { Result } = require('express-validator')
+const notificationSend = require('./operations/notifications/notificationSender')
+const user = require('./models/user')
 env.config()
 const app = express()
 
@@ -33,7 +35,7 @@ db.once('open', () => {
     const changeStream = sensorCollection.watch();
 
     changeStream.on('change', (change) => {
-        
+
         if (change.operationType === 'insert') {
             const data = change.fullDocument
 
@@ -44,30 +46,45 @@ db.once('open', () => {
                 data_value: data.data_value,
                 date: convertToDateObject(data.date)
             })
-            
+
             if (TemperatureLimit.checkValue(data.data_value)) {
-                newProcessedReading.alert = {
-                        alertStatus: true,
-                        alertText: "Temperature is greater than threshold value"
-                }
-            }
-            
-            newProcessedReading
-                    .save()
+                // <<<<<<< HEAD
+                //                 const alert = new Alert({
+                //                     sensor: data._id,
+                //                     sensor_id: data.sensor_id,
+                //                     alertText: process.env.ALERT_MESSAGE
+                //                 })
+                //                 alert
+                // =======  
+                user.find()
+                    .exec()
                     .then(result => {
-                        console.log(result)
+                        notificationSend.notificationSender(result)
                     })
                     .catch(err => {
-                        res.status(404).json({
-                            error: 'Error is occure'
-                        });
-                        console.log(err)
+                        console.log("Can not send Notifications")
                     })
-             
-            
+                newProcessedReading.alert = {
+                    alertStatus: true,
+                    alertText: "Temperature is greater than threshold value"
+                }
+            }
+            newProcessedReading
+                .save()
+                .then(result => {
+                    console.log(result)
+                })
+                .catch(err => {
+                    res.status(404).json({
+                        error: 'Error is occure'
+                    });
+                    console.log(err)
+                })
+
+
             console.log("\n", data)
         }
-        
+
     })
 })
 
