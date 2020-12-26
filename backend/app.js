@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const cors = require('cors')
 const env = require('dotenv')
 const Alert = require('./models/alert')
 const TemperatureLimit = require('./operations/checkTemperatureLimit')
@@ -11,6 +12,8 @@ const app = express()
 const DATABASE_URL = "mongodb+srv://new-user:software123@cluster0.pnwp2.mongodb.net/sensors?retryWrites=true&w=majority"
 
 app.use(bodyParser.json({ extended: true }))
+
+app.use(cors())
 
 mongoose.connect(DATABASE_URL, {
     useNewUrlParser: true, useUnifiedTopology: true
