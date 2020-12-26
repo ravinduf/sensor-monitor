@@ -49,14 +49,15 @@ db.once('open', () => {
             })
 
             if (TemperatureLimit.checkValue(data.data_value)) {
-                user.find()
-                    .exec()
-                    .then(result => {
-                        notificationSend.notificationSender(result)
-                    })
-                    .catch(err => {
-                        console.log("Can not send Notifications")
-                    })
+                // user.find()
+                //     .exec()
+                //     .then(result => {
+                //         notificationSend.notificationSender(result)
+                //     })
+                //     .catch(err => {
+                //         console.log("Can not send Notifications")
+                //     })
+                
                 newProcessedReading.alert = {
                     alertStatus: true,
                     alertText: "Temperature is greater than threshold value"
