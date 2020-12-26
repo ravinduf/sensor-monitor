@@ -21,6 +21,7 @@ app.use(cors())
 mongoose.connect(DATABASE_URL, {
     useNewUrlParser: true, useUnifiedTopology: true
 })
+mongoose.set('useCreateIndex', true);
 
 const db = mongoose.connection
 
@@ -48,14 +49,6 @@ db.once('open', () => {
             })
 
             if (TemperatureLimit.checkValue(data.data_value)) {
-                // <<<<<<< HEAD
-                //                 const alert = new Alert({
-                //                     sensor: data._id,
-                //                     sensor_id: data.sensor_id,
-                //                     alertText: process.env.ALERT_MESSAGE
-                //                 })
-                //                 alert
-                // =======  
                 user.find()
                     .exec()
                     .then(result => {
@@ -69,6 +62,7 @@ db.once('open', () => {
                     alertText: "Temperature is greater than threshold value"
                 }
             }
+
             newProcessedReading
                 .save()
                 .then(result => {
