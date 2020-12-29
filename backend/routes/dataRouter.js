@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const sensor = require('../models/sensor')
-const {getData , getTempAlerts} = require('../controllers/tempDataController')
+const {getData , getTempAlerts} = require('../controllers/DataController')
 
 
-router.get('/data', getData)
+router.get('/', getData)
 router.get('/alerts', getTempAlerts)
 
 
