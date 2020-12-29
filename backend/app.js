@@ -35,7 +35,7 @@ db.once('open', () => {
     DBListener(changeStream);
 })
 
-app.use('/temperature', require('./routes/tempRouter'))
+app.use('/data', require('./routes/dataRouter'))
 
 app.use((req, res, next) => {
     const error = new Error('Not found')
