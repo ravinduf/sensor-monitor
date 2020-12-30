@@ -36,6 +36,8 @@ db.once('open', () => {
 })
 
 app.use('/data', require('./routes/dataRouter'))
+app.use('/signin',require('./routes/auth'))
+app.use('/signup',require('./routes/users'))
 
 app.use((req, res, next) => {
     const error = new Error('Not found')

@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const {check,validationResult} = require('express-validator/check');
+const {check,validationResult} = require('express-validator');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const bcrypt = require('bcryptjs');
 
-const User = require('../../models/User');
+const User = require('../models/user');
 
 router.post('/',[
     check('email','Please enter valid email').isEmail(),
