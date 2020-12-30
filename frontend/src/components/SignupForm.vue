@@ -28,8 +28,8 @@
         axios.post('http://localhost:5000/signup',{
           'name': this.name,
           'email': this.email,
-          'password': this.password,
           'number': this.number,
+          'password': this.password,
         }).then(res => {
 
           this.$router.push('/charts');

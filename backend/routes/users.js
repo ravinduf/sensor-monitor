@@ -11,8 +11,9 @@ const config = require('config');
 router.post('/', [
     check('name', 'Name is Required').not().isEmpty(),
     check('email', 'Please enter valid email').isEmail(),
-    check('number', "Phone number is required").isEmpty(),
+    check('number', "Phone number is required").not().isEmpty(),
     check('password', 'Please enter a password with 6 or more').isLength({ min: 6 }),
+
 ], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
