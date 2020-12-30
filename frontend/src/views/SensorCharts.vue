@@ -57,7 +57,7 @@ export default {
       const startDatePart = startDate.split(',')[0].split('/');
       const endDatePart = endDate.split(',')[0].split('/');
 
-      const url = `http://localhost:5000/temperature/data?startDate=%3C${startDatePart[2]}-${startDatePart[0]}-${startDatePart[1]}%3E&endDate=%3C${endDatePart[2]}-${endDatePart[0]}-${endDatePart[1]}%3E`;
+      const url = `http://localhost:5000/data?startDate=%3C${startDatePart[2]}-${startDatePart[0]}-${startDatePart[1]}%3E&endDate=%3C${endDatePart[2]}-${endDatePart[0]}-${endDatePart[1]}%3E`;
 
       const response = await axios.get(url);
       const resData = response.data;
@@ -86,13 +86,13 @@ export default {
       if(this.sensorId === 'all'){
         return this.sensorData;
       }else{
-        return this.sensorData.filter(data => data.sensorId !== this.sensorId);
+        return this.sensorData.filter(data => data.sensorId === this.sensorId);
       }
 
     }
   },
   created()  {
-    axios.get(`http://localhost:5000/temperature/data`).then(response => {
+    axios.get(`http://localhost:5000/data`).then(response => {
       const data = response.data;
 
       this.chatTitle = data[0].reading_type.toUpperCase();
