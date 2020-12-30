@@ -13,7 +13,10 @@
         <br/>
         <DateRangePicker @setDate="changeDate"/>
 
-        <line-chart v-if="renderChart" :chartData="changeGraphDataAccordingSelect" :options="chartOptions" :label="chatTitle"></line-chart>
+        <div v-if="changeGraphDataAccordingSelect.length">
+          <line-chart v-if="renderChart" :chartData="changeGraphDataAccordingSelect" :options="chartOptions" :label="chatTitle"></line-chart>
+        </div>
+
       </div>
 
     </div>
@@ -77,7 +80,11 @@ export default {
 
       });
       this.renderChart = true;
-      console.log(this.sensorData.length)
+
+      if(this.sensorData.length === 0){
+        this.$swal('fuck off');
+      }
+
     }
   },
   computed: {
