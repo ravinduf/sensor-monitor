@@ -2,6 +2,7 @@
   <div id="app">
 
     <router-view/>
+    <link rel="stylesheet" href="https://bootswatch.com/4/solar/bootstrap.min.css">
 
   </div>
 </template>
