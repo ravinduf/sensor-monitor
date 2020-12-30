@@ -1,6 +1,5 @@
 const processedReading = require('../models/processedReading')
 
-
 const getData = async (req, res) => {
 
     const queryStatement = {
@@ -30,7 +29,7 @@ const getData = async (req, res) => {
     }
 }
 
-const getTempAlerts = async (req, res) => {
+const getAlerts = async (req, res) => {
     
     try {
         const alerts = await processedReading.find( {reading_type: req.query.reading_type, 'alert.alertStatus' : true })   
@@ -41,4 +40,4 @@ const getTempAlerts = async (req, res) => {
     }
 }
 
-module.exports = {getData, getTempAlerts}
+module.exports = {getData, getAlerts}

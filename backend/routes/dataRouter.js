@@ -5,7 +5,7 @@ const {getData , getTempAlerts} = require('../controllers/DataController')
 
 
 router.get('/', getData)
-router.get('/alerts', getTempAlerts)
+router.get('/alerts', getAlerts)
 
 
 module.exports = router
