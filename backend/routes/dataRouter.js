@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const sensor = require('../models/sensor')
-const {getData , getTempAlerts} = require('../controllers/DataController')
+const {getData , getAlerts} = require('../controllers/DataController')
 
 
 router.get('/', getData)
