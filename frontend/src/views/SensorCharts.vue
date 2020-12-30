@@ -71,11 +71,13 @@ export default {
         const date = moment(singleData.date,"YYYYMMDD").format("MM/DD");
         const value = singleData.data_value;
         const sensorId = singleData.sensor_id;
+        const sensorType = singleData.reading_type;
 
         this.sensorData.push({
           date: date,
           value: value,
-          sensorId: sensorId
+          sensorId: sensorId,
+          sensorType: sensorType,
         });
 
       });
@@ -93,7 +95,7 @@ export default {
       if(this.sensorId === 'all'){
         return this.sensorData;
       }else{
-        return this.sensorData.filter(data => data.sensorId === this.sensorId);
+        return this.sensorData.filter(data => data.sensorType === this.sensorId);
       }
 
     }
@@ -110,15 +112,17 @@ export default {
         const date = moment(singleData.date,"YYYYMMDD").format("MM/DD");
         const value = singleData.data_value;
         const sensorId = singleData.sensor_id;
+        const sensorType = singleData.reading_type;
 
-        if(!this.sensorIdList.includes(singleData.sensor_id)){
-          this.sensorIdList.push(singleData.sensor_id);
+        if(!this.sensorIdList.includes(singleData.reading_type)){
+          this.sensorIdList.push(singleData.reading_type);
         }
 
         this.sensorData.push({
           date: date,
           value: value,
-          sensorId: sensorId
+          sensorId: sensorId,
+          sensorType: sensorType,
         });
 
       });
