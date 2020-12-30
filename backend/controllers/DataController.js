@@ -3,7 +3,7 @@ const processedReading = require('../models/processedReading')
 const getData = async (req, res) => {
 
     const queryStatement = {
-        reading_type: req.query.reading_type
+        
     }
     
     if (req.query.startDate && req.query.endDate) {
