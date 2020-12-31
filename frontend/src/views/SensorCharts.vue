@@ -1,6 +1,5 @@
 <template>
   <div id="app" class="container">
-
     <div class="row mt-5" v-if="sensorData.length > 0" >
       <div class="col">
 
@@ -29,13 +28,13 @@
   import moment from 'moment';
   import LineChart from '../components/LineChart'
 
-  import DateRangePicker from "@/components/DateRangePicker";
+  import DateRangePicker from "../components/DateRangePicker";
 
 export default {
   name: 'SensorCharts',
   components: {
     LineChart,
-    DateRangePicker
+    DateRangePicker,
   },
   data(){
     return {
