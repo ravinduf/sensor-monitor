@@ -1,13 +1,18 @@
 <template>
   <div id="app">
-    <app-bar></app-bar>
+    <NavBar/>
     <router-view/>
-    
-    <link rel="stylesheet" href="https://bootswatch.com/4/pulse/bootstrap.min.css">
-    
-
   </div>
 </template>
+
+<script>
+  import NavBar from "./components/NavBar";
+  export default {
+    components: {
+      NavBar
+    }
+  }
+</script>
 
 <style>
 #app {
