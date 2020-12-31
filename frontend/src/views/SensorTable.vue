@@ -23,7 +23,7 @@
         </tr>
         </thead>
         <tbody >
-        <tr v-for="data in resData">
+        <tr :key="data" v-for="data in resData">
           <td>{{new Date(data.date).getFullYear()}}-{{new Date(data.date).getMonth() + 1}}-{{new Date(data.date).getDate()}}</td>
           <td>{{new Date(data.date).getHours()}}:{{new Date(data.date).getMinutes()}}-{{new Date(data.date).getSeconds()}}</td>
 
