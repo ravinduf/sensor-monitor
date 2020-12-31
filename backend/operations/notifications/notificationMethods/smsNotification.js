@@ -1,3 +1,3 @@
-module.exports.smsNotificationSend = function () {
-    return "SMS send is success"
+module.exports.smsNotificationSend = function (numbers) {
+    return console.log("Sending sms notification to "+numbers +"\nSuccessfully sended sms")
 }
