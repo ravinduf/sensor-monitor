@@ -1,4 +1,4 @@
 
-module.exports.emailNotificationSend = function () {
-    return "Email send success"
+module.exports.emailNotificationSend = function (email) {
+    return console.log("Sending email notification to "+email +"\nSuccessfully sended email")
 }

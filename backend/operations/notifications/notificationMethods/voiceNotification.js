@@ -1,4 +1,4 @@
 
-module.exports.voiceNotificationSend = function () {
-    return "Voice Call success"
+module.exports.voiceNotificationSend = function (numbers) {
+    return console.log("Sending Vioce message notification to "+numbers +"\nSuccessfully sended Voice message")
 }
