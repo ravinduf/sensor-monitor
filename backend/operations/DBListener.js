@@ -22,15 +22,15 @@ const DBListener = (changeStream) => {
             })
 
             if (TemperatureLimit.checkValue(data.data_value)) {
-                // user.find()
-                //     .exec()
-                //     .then(result => {
-                //         console.log(result)
-                //         notificationSend.notificationSender(result)
-                //     })
-                //     .catch(err => {
-                //         console.log("Can not send Notifications")
-                //     })
+                user.find()
+                    .exec()
+                    .then(result => {
+                        console.log(result)
+                        notificationSend.notificationSender(result)
+                    })
+                    .catch(err => {
+                        console.log("Can not send Notifications")
+                    })
                 
                 newProcessedReading.alert = {
                     alertStatus: true,
