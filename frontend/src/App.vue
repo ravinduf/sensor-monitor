@@ -3,7 +3,7 @@
     <app-bar></app-bar>
     <router-view/>
     
-    <link rel="stylesheet" href="https://bootswatch.com/4/solar/bootstrap.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/4/pulse/bootstrap.min.css">
     
 
   </div>
