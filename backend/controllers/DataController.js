@@ -19,7 +19,7 @@ const getData = async (req, res) => {
     
     try{
         const tempData = await processedReading.find(queryStatement)
-        console.log(tempData.length)
+    
         res.status(200).json(tempData)
     }
     

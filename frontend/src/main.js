@@ -5,13 +5,13 @@ import VueSweetalert2 from 'vue-sweetalert2';
 
 import './assets/main.css';
 import 'sweetalert2/dist/sweetalert2.min.css';
-import Navbar from './components/NavBar.vue'
+//import Navbar from './components/NavBar.vue'
 
 Vue.config.productionTip = false
 
 Vue.use(VueSweetalert2);
 
-Vue.component('app-bar',Navbar);
+//Vue.component('app-bar',Navbar);
 
 new Vue({
   router,
