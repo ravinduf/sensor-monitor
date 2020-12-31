@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 import Home from '../views/Home.vue'
 import SensorCharts from "../views/SensorCharts";
+import SensorTable from "../views/SensorTable";
 
 Vue.use(VueRouter)
 
@@ -16,6 +17,11 @@ const routes = [
     path: '/charts',
     name: 'SensorCharts',
     component: SensorCharts
+  },
+  {
+    path: '/tables',
+    name: 'SensorTable',
+    component: SensorTable
   }
 ]
 

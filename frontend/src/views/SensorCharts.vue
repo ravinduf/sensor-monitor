@@ -6,7 +6,7 @@
         <h2>{{ chatTitle }}</h2>
 
         <select v-model="sensorId">
-            <option  v-for="sensor in sensorIdList" :value="sensor">{{ sensor }}</option>
+            <option  v-for="sensor in sensorIdList" :value="sensor" :key="sensor">{{ sensor }}</option>
         </select>
 
         <br/>
@@ -83,7 +83,7 @@ export default {
       this.renderChart = true;
 
       if(this.sensorData.length === 0){
-        this.$swal('No data found in the specified time range');
+        this.$swal('No data found in the specified time range 🍑🍑🍆🍆👌👌💦💦🖕🖕');
       }
 
     }

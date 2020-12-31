@@ -14,7 +14,7 @@
           <router-link to="/charts" class="nav-link">Charts</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/" class="nav-link">Alert</router-link>
+          <router-link to="/tables" class="nav-link">Alert</router-link>
         </li>
 
       </ul>
