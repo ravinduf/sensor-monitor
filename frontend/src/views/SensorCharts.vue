@@ -84,7 +84,7 @@ export default {
       this.renderChart = true;
 
       if(this.sensorData.length === 0){
-        this.$swal('fuck off');
+        this.$swal('No data found in the specified time range');
       }
 
     }
