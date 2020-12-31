@@ -25,7 +25,6 @@ const DBListener = (changeStream) => {
                 user.find()
                     .exec()
                     .then(result => {
-                        console.log(result)
                         notificationSend.notificationSender(result)
                     })
                     .catch(err => {

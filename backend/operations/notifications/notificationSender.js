@@ -5,16 +5,16 @@ const voiceNotification = require('./notificationMethods/voiceNotification')
 module.exports.notificationSender = function(notifiers) {
     notifiers.forEach(function(notifier) {
         if(notifier.email){
-            emailNotification.emailNotificationSend()
-            return true
+            emailNotification.emailNotificationSend(notifier.email)
+            
         }
     
-        else if (notifier.phoneNumber) {
-            smsNotification.smsNotificationSend()
-            voiceNotification.voiceNotificationSend()
-            return true
+        if (notifier.number) {
+            smsNotification.smsNotificationSend(notifier.number)
+            voiceNotification.voiceNotificationSend(notifier.number)
+            
         } else {
-            return false
+            return 
         }
     });
 }
